@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08752b">
+<title>DEX MART | Your Trusted Online Shop</title>
+<style>
+:root{--green:#08752b;--deep:#07551f;--red:#d9252a;--gold:#f4cf42;--ink:#17231a;--muted:#68736b;--line:#e5ece6;--bg:#f7faf7}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.top{background:var(--deep);color:#fff;padding:9px 5%;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px}
+header{background:#fff;padding:16px 5%;display:flex;align-items:center;gap:18px;justify-content:space-between;box-shadow:0 2px 12px #102c1510}
+.brand{font-size:30px;font-weight:900;letter-spacing:-1px;color:var(--green);white-space:nowrap}.brand span{color:var(--red)}.tag{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+.search{flex:1;max-width:520px;display:flex}.search input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px 0 0 10px;font-size:15px}.search button{border:0;background:var(--green);color:white;padding:0 18px;border-radius:0 10px 10px 0}
+.actions{display:flex;gap:8px;align-items:center}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;cursor:pointer}.green{background:var(--green);color:white}.light{background:#edf6ef;color:var(--deep)}
+nav{background:var(--green);color:#fff;padding:12px 5%;display:flex;gap:24px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-weight:650;font-size:14px}
+.hero{margin:22px auto;max-width:1180px;padding:36px 5%;border-radius:18px;background:linear-gradient(115deg,#e5f7d9,#fff 58%,#f5f9df);display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:18px;overflow:hidden}
+.hero h1{font-size:clamp(32px,5vw,58px);margin:0;color:var(--green);line-height:1.05}.hero h1 span{color:var(--red)}.hero p{font-size:18px;line-height:1.6}.hero-art{font-size:100px;text-align:center;filter:drop-shadow(0 8px 8px #315b2522)}
+.wrap{max-width:1180px;margin:28px auto;padding:0 18px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.section-title h2{margin:0;font-size:23px}.muted{color:var(--muted);font-size:13px}
+.categories,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.cat,.product{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}.cat .emoji{font-size:34px}.cat strong{display:block;margin-top:8px}
+.product .emoji{font-size:48px;background:#f3f8f2;border-radius:12px;padding:16px}.product h3{font-size:16px;margin:12px 0 6px}.price{font-weight:800;color:var(--green);margin:8px}.product button{width:100%;margin-top:8px}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.benefit{background:#fff;border:1px solid var(--line);padding:16px;border-radius:12px;text-align:center;font-weight:650}
+footer{background:#102b18;color:#fff;padding:28px 5%;margin-top:40px}footer a{color:#c7f0ce}
+.whatsapp{position:fixed;right:18px;bottom:18px;background:#16a34a;color:white;border-radius:999px;padding:14px 18px;text-decoration:none;font-weight:800;box-shadow:0 5px 20px #0002}
+#cartCount{background:var(--gold);color:#1c241c;border-radius:99px;padding:2px 7px}
+@media(max-width:760px){header{flex-wrap:wrap}.brand{font-size:25px}.search{order:3;flex-basis:100%;max-width:none}.hero{grid-template-columns:1fr;padding:26px}.hero-art{font-size:70px}.categories,.products{grid-template-columns:repeat(2,1fr)}.benefits{grid-template-columns:1fr}nav{gap:14px}}
+</style>
+</head>
+<body>
+<div class="top"><span id="topline">Healthy Life • Happy Life</span><span>WhatsApp: 01748-820303</span><span id="delivery">অর্ডার করুন WhatsApp-এ</span></div>
+<header>
+  <div><div class="brand">DEX <span>MART</span></div><div class="tag">YOUR TRUSTED ONLINE SHOP</div></div>
+  <div class="search"><input id="search" placeholder="পণ্য খুঁজুন..."><button onclick="renderProducts()">⌕</button></div>
+  <div class="actions"><button class="btn light" onclick="toggleLang()" id="langBtn">English</button><button class="btn green" onclick="sendOrder()">কার্ট <span id="cartCount">0</span></button></div>
+</header>
+<nav><a href="#home" data-bn="হোম" data-en="Home">হোম</a><a href="#categories" data-bn="ক্যাটাগরি" data-en="Categories">ক্যাটাগরি</a><a href="#products" data-bn="পণ্যসমূহ" data-en="Products">পণ্যসমূহ</a><a href="#about" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a><a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a></nav>
+<section class="hero" id="home">
+ <div><h1>DEX <span>MART</span></h1><h2 id="heroTitle">আপনার পছন্দ, আমাদের অঙ্গীকার</h2><p id="heroText">DXN পণ্যসহ দৈনন্দিন প্রয়োজনীয় পণ্য সহজে অর্ডার করুন। পণ্যের বর্তমান দাম ও বিস্তারিত জানতে WhatsApp করুন।</p><a class="btn green" href="#products" id="shopBtn" style="display:inline-block;text-decoration:none">পণ্য দেখুন</a></div>
+ <div class="hero-art" aria-label="Shopping">🛍️ 🌿</div>
+</section>
+<main class="wrap">
+ <section id="categories"><div class="section-title"><h2 id="catTitle">পণ্যের ক্যাটাগরি</h2><span class="muted">DEX MART</span></div><div class="categories" id="categoryGrid"></div></section>
+ <div class="benefits"><div class="benefit" id="b1">✓ অর্ডার WhatsApp-এ নিশ্চিত করুন</div><div class="benefit" id="b2">✓ পণ্যের বিস্তারিত জেনে কিনুন</div><div class="benefit" id="b3">✓ সরাসরি যোগাযোগের সুবিধা</div></div>
+ <section id="products"><div class="section-title"><h2 id="productTitle">জনপ্রিয় পণ্য</h2><span class="muted" id="priceNote">দাম জানতে WhatsApp করুন</span></div><div class="products" id="productGrid"></div></section>
+ <section id="about" style="margin-top:30px"><h2 id="aboutTitle">DEX MART সম্পর্কে</h2><p id="aboutText">DEX MART একটি অনলাইন শপ। এখানে DXN এবং অন্যান্য ব্র্যান্ডের পণ্য তালিকাভুক্ত করা হবে। পণ্যের প্রাপ্যতা, দাম ও ডেলিভারির তথ্য অর্ডারের আগে নিশ্চিত করে নিন।</p></section>
+ <section id="contact" style="margin-top:24px"><h2 id="contactTitle">যোগাযোগ</h2><p>WhatsApp: <strong>01748-820303</strong></p><button class="btn green" onclick="chatNow()" id="chatBtn">WhatsApp-এ কথা বলুন</button></section>
+</main>
+<footer><strong>DEX MART</strong><p id="footerText">আপনার পছন্দ, আমাদের অঙ্গীকার।</p><small>Note: DEX MART is an independent shop. DXN is a third-party brand; this website does not claim official affiliation or authorization.</small></footer>
+<a class="whatsapp" href="#" onclick="chatNow();return false">☏ WhatsApp</a>
+<script>
+const phone="8801748820303";
+let lang="bn", cart=[];
+const cats=[
+ {bn:"সাবান",en:"Soap",e:"🧼"},{bn:"শ্যাম্পু",en:"Shampoo",e:"🧴"},
+ {bn:"ব্ল্যাক কফি",en:"Black Coffee",e:"☕"},{bn:"লেমনজি",en:"Lemonji",e:"🍋"},
+ {bn:"ফেসওয়াশ",en:"Face Wash",e:"🫧"},{bn:"লোশন",en:"Lotion",e:"🧴"},
+ {bn:"বডিওয়াশ",en:"Body Wash",e:"🚿"},{bn:"মাশরুম পণ্য",en:"Mushroom Products",e:"🍄"},
+ {bn:"অন্যান্য পণ্য",en:"Other Products",e:"🛍️"}
+];
+const products=[
+ {bn:"DXN সাবান",en:"DXN Soap",cat:"Soap",e:"🧼"},
+ {bn:"DXN শ্যাম্পু",en:"DXN Shampoo",cat:"Shampoo",e:"🧴"},
+ {bn:"DXN ব্ল্যাক কফি",en:"DXN Black Coffee",cat:"Black Coffee",e:"☕"},
+ {bn:"DXN লেমনজি",en:"DXN Lemonji",cat:"Lemonji",e:"🍋"},
+ {bn:"DXN ফেসওয়াশ",en:"DXN Face Wash",cat:"Face Wash",e:"🫧"},
+ {bn:"DXN লোশন",en:"DXN Lotion",cat:"Lotion",e:"🧴"},
+ {bn:"DXN বডিওয়াশ",en:"DXN Body Wash",cat:"Body Wash",e:"🚿"},
+ {bn:"DXN মাশরুম পণ্য",en:"DXN Mushroom Products",cat:"Mushroom Products",e:"🍄"}
+];
+function categoryMarkup(){document.getElementById("categoryGrid").innerHTML=cats.map(c=>`<div class="cat"><div class="emoji">${c.e}</div><strong>${c[lang]}</strong></div>`).join("")}
+function renderProducts(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=products.filter(p=>(p.bn+" "+p.en).toLowerCase().includes(q));
+ document.getElementById("productGrid").innerHTML=list.map((p)=>`<article class="product"><div class="emoji">${p.e}</div><h3>${p[lang]}</h3><div class="muted">${lang==="bn"?"দাম জানতে যোগাযোগ করুন":"Contact for price"}</div><button class="btn green" onclick="addCart('${p.bn}')">${lang==="bn"?"কার্টে যোগ করুন":"Add to cart"}</button></article>`).join("") || (lang==="bn"?"কোনো পণ্য পাওয়া যায়নি":"No products found");
+}
+function addCart(name){cart.push(name);document.getElementById("cartCount").textContent=cart.length}
+function chatNow(){const msg=lang==="bn"?"আসসালামু আলাইকুম, DEX MART থেকে পণ্য সম্পর্কে জানতে চাই।":"Hello, I would like to ask about products from DEX MART.";window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank")}
+function sendOrder(){
+ if(!cart.length){chatNow();return}
+ const msg=(lang==="bn"?"আসসালামু আলাইকুম, আমি এই পণ্যগুলো অর্ডার করতে চাই:\n":"Hello, I would like to order:\n")+cart.map((x,i)=>(i+1)+". "+x).join("\n")+(lang==="bn"?"\nআমার সঙ্গে যোগাযোগ করুন।":"\nPlease contact me.");
+ window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+function toggleLang(){
+ lang=lang==="bn"?"en":"bn";document.documentElement.lang=lang;document.getElementById("langBtn").textContent=lang==="bn"?"English":"বাংলা";
+ const ids={topline:["Healthy Life • Happy Life","Healthy Life • Happy Life"],delivery:["অর্ডার করুন WhatsApp-এ","Order on WhatsApp"],heroTitle:["আপনার পছন্দ, আমাদের অঙ্গীকার","Your Choice, Our Commitment"],heroText:["DXN পণ্যসহ দৈনন্দিন প্রয়োজনীয় পণ্য সহজে অর্ডার করুন। পণ্যের বর্তমান দাম ও বিস্তারিত জানতে WhatsApp করুন।","Order everyday essentials and DXN products with ease. Message us on WhatsApp for current prices and details."],shopBtn:["পণ্য দেখুন","Browse Products"],catTitle:["পণ্যের ক্যাটাগরি","Product Categories"],b1:["✓ অর্ডার WhatsApp-এ নিশ্চিত করুন","✓ Confirm orders on WhatsApp"],b2:["✓ পণ্যের বিস্তারিত জেনে কিনুন","✓ Ask for product details before buying"],b3:["✓ সরাসরি যোগাযোগের সুবিধা","✓ Direct customer support"],productTitle:["জনপ্রিয় পণ্য","Popular Products"],priceNote:["দাম জানতে WhatsApp করুন","Message us for prices"],aboutTitle:["DEX MART সম্পর্কে","About DEX MART"],aboutText:["DEX MART একটি অনলাইন শপ। এখানে DXN এবং অন্যান্য ব্র্যান্ডের পণ্য তালিকাভুক্ত করা হবে। পণ্যের প্রাপ্যতা, দাম ও ডেলিভারির তথ্য অর্ডারের আগে নিশ্চিত করে নিন।","DEX MART is an online shop featuring DXN and other brands. Please confirm availability, prices and delivery details before ordering."],contactTitle:["যোগাযোগ","Contact"],chatBtn:["WhatsApp-এ কথা বলুন","Chat on WhatsApp"],footerText:["আপনার পছন্দ, আমাদের অঙ্গীকার।","Your Choice, Our Commitment."]};
+ for(const [id,v] of Object.entries(ids))document.getElementById(id).textContent=v[lang==="bn"?0:1];
+ document.querySelectorAll("nav a").forEach(a=>a.textContent=a.dataset[lang]);categoryMarkup();renderProducts();
+}
+categoryMarkup();renderProducts();
+</script>
+</body></html>
